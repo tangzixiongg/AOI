@@ -1,5 +1,4 @@
-#ifndef BASE_DEFINE_H
-#define BASE_DEFINE_H
+#pragma once
 
 #include <stdint.h>
 #include <functional>
@@ -16,18 +15,28 @@
 #include <algorithm>
 #include <memory>
 #include <qcolor.h>
+#include <QColorDialog>
 
-#define ROLE_COLOR (Qt::black)
-#define NPC_COLOR (Qt::yellow)
-#define MONSTER_COLOR (Qt::bule)
-#define IN_VIEW_COLOR (Qt::red)
+// 角色颜色
+/*
+QColor ROLE_COLOR(0, 0, 0);             // 黑色
+QColor MONSTER_COLOR(255, 222, 173);    // 蓝色
+QColor NPC_COLOR(255, 255, 0);          // 黄色
+QColor IN_VIEW_COLOR(255, 0, 0);        // 红色
+*/
 
+/*
+#define ROLE_COLOR (QColor(0, 0, 0))
+#define MONSTER_COLOR (QColor(255, 222, 173))
+#define NPC_COLOR (QColor(255, 255, 0))
+#define IN_VIEW_COLOR (QColor(255, 0, 0))
+*/
 
 // 角色枚举
 enum class ENUM_OBJ_TYPE
 {
     E_OBJ_TYPE_ROLE = 1,    // 玩家
-    E_OBJ_TYPE_MONSTER =2,  // 怪物
+    E_OBJ_TYPE_MONSTER = 2,  // 怪物
     E_OBJ_TYPE_NPC = 3,     // npc
 };
 
@@ -58,4 +67,3 @@ private:
 
 
 
-#endif // BASE_DEFINE_H

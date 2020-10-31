@@ -1,4 +1,11 @@
-#ifndef ROLE_H
-#define ROLE_H
+#pragma once
+#include "Iobject.h"
 
-#endif // ROLE_H
+class role: public Iobject
+{
+public:
+    role(uint64_t qwObjId);
+    virtual ~role();
+};
+
+

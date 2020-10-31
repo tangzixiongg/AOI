@@ -1,5 +1,4 @@
-#ifndef AOI_INTERFACE_H
-#define AOI_INTERFACE_H
+#pragma once
 
 #include "base_define.h"
 
@@ -19,4 +18,3 @@ public:
 
 };
 
-#endif // AOI_INTERFACE_H

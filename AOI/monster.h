@@ -1,4 +1,12 @@
-#ifndef MONSTER_H
-#define MONSTER_H
+#pragma once
 
-#endif // MONSTER_H
+#include "Iobject.h"
+
+class monster: public Iobject
+{
+public:
+    monster(uint64_t qwObjId);
+    virtual ~monster();
+};
+
+

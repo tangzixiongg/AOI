@@ -1,4 +1,12 @@
-#ifndef NPC_H
-#define NPC_H
+#pragma once
+#include "Iobject.h"
 
-#endif // NPC_H
+class npc: public Iobject
+{
+public:
+    npc(uint64_t qwObjId);
+    virtual ~npc();
+
+};
+
+
