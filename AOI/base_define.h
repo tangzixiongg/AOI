@@ -17,6 +17,7 @@
 #include <qcolor.h>
 #include <QColorDialog>
 
+const constexpr int32_t CM_PIXEL_NUM = 16; //1厘米的像素数
 // 角色颜色
 /*
 QColor ROLE_COLOR(0, 0, 0);             // 黑色
@@ -61,7 +62,43 @@ class map_info
 public:
     map_info(){}
 
+    map_info(int32_t _nWidth,int32_t _nHeight,int32_t _nSquareSize, int32_t _nViewSize)
+    {
+        nWidth = _nWidth;
+        nHeight = _nHeight;
+        nSquareSize = _nSquareSize;
+        nViewSize = _nViewSize;
+
+        nScreenWidthPixel = nWidth * CM_PIXEL_NUM;
+        nScreenHeightPiexl = nHeight * CM_PIXEL_NUM;
+        nGridSquarePixelNum = nSquareSize * CM_PIXEL_NUM;
+
+        nGridXcount = nWidth / nSquareSize + 1;
+        nGridZcount = nHeight / nSquareSize + 1;
+    }
+
+
 private:
+    int32_t nNPCnums = 20; //随机生成的NPC个数
+    int32_t nMonsternums = 200; //随机生成的怪物的个数
+    int32_t nLTX = 0;   //地图左上角的X坐标
+    int32_t nLTZ = 0;   //地图左上角的Y坐标
+
+    int32_t nWidth = 100; //地图的宽度
+    int32_t nHeight = 50; //地图的高度
+
+    int32_t nSquareSize = 0;  //每个格子宽
+    int32_t nViewSize = 1;   //视野半径格子数
+
+    int32_t nScreenWidthPixel = 0; //屏幕的宽度的像素数
+    int32_t nScreenHeightPiexl = 0;  //屏幕的高度像素数
+
+    int32_t nGridSquarePixelNum = 0;   //每个格子的像素数
+    int32_t nGridXcount = 0;   //X轴的格子数
+    int32_t nGridZcount = 0;   //z轴格子数
+
+    bool bMonsterMove = false;  //怪物是否移动
+    bool bCheckViewObject = false; //是否检测玩家视野内的对象
 
 };
 
