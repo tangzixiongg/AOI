@@ -5,7 +5,9 @@ SOURCES += \
     monster.cpp \
     npc.cpp \
     object_mgr.cpp \
-    role.cpp
+    role.cpp \
+    functions.cpp \
+    aoi_widget.cpp
 
 HEADERS += \
     Iobject.h \
@@ -14,4 +16,6 @@ HEADERS += \
     monster.h \
     npc.h \
     object_mgr.h \
-    role.h
+    role.h \
+    functions.h \
+    aoi_widget.h
