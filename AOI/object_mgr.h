@@ -2,6 +2,7 @@
 #define OBJECT_MGR_H
 
 #include "base_define.h"
+#include "singleton.h"
 
 class Iobject;
 
@@ -21,5 +22,7 @@ private:
     std::unordered_map<uint64_t, Iobject*> m_umapObject;
     static uint64_t m_uniqueId;
 };
+
+#define OBJECTMGR (*(singleton<object_mgr>::instance()))
 
 #endif // OBJECT_MGR_H

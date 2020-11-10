@@ -54,7 +54,7 @@ std::string get_server_config_value(std::string strName, std::string strKeyName,
 void set_server_config_value(std::string strName, std::string strKeyName, std::string strValue, const std::string& strFileName)
 {
     std::string strPath = g_strPath + "\\" + strFileName;
-    WritePrivateProfileString(secName.c_str(), keyName.c_str(), Val.c_str(), strPath.c_str());
+    WritePrivateProfileString(strName.c_str(), strKeyName.c_str(), strValue.c_str(), strPath.c_str());
 }
 std::string getExePath()
 {
