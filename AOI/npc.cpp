@@ -66,10 +66,11 @@ void npc::fade_in(const std::vector<uint64_t>& vecFadeInObjUids)
          {
              continue;
          }
-         Iobject* pObj = nullptr; // = 单例get_object(uid);
+         Iobject* pObj = OBJECTMGR.get_object(uid);
          if (nullptr != pObj && pObj->is_role())
          {
-             //this->set_color();
+             QColor cl(255, 0, 0);
+             this->set_color(cl);
              break;
          }
      }
@@ -86,10 +87,11 @@ void npc::fade_out(const std::vector<uint64_t>& vecFadeOutObjUids)
         {
             continue;
         }
-        Iobject* pObj = nullptr; // = 单例get_object(uid);
+        Iobject* pObj = OBJECTMGR.get_object(uid);
         if (nullptr != pObj && pObj->is_role())
         {
-            //this->set_color();
+            QColor cl(255, 255, 0);
+            this->set_color(cl);
             break;
         }
     }

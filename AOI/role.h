@@ -1,5 +1,6 @@
 #pragma once
 #include "Iobject.h"
+#include "object_mgr.h"
 
 class role: public Iobject
 {

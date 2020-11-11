@@ -53,7 +53,7 @@ void role::set_radius(uint32_t dwRadius)
     m_dwRadius = dwRadius;
 }
 
-// 如果进来的对象中有role则表示本npc进入了role的视野内，那么本npc要更改颜色
+
 void role::fade_in(const std::vector<uint64_t>& vecFadeInObjUids)
 {
      for (auto uid : vecFadeInObjUids)
@@ -62,10 +62,11 @@ void role::fade_in(const std::vector<uint64_t>& vecFadeInObjUids)
          {
              continue;
          }
-         Iobject* pObj = nullptr;   // 单例
+         Iobject* pObj = OBJECTMGR.get_object(uid);
          if (nullptr != pObj)
          {
-             //pObj->set_color(uid);
+             QColor cl(255, 0, 0);
+             pObj->set_color(cl);
          }
      }
 }
@@ -77,16 +78,18 @@ void role::fade_out(const std::vector<uint64_t>& vecFadeOutObjUids)
         {
             continue;
         }
-        Iobject* pObj = nullptr;   // 单例
+        Iobject* pObj = OBJECTMGR.get_object(uid);
         if (nullptr != pObj)
         {
             if (pObj->is_npc())
             {
-                //pObj->set_color();
+                QColor cl(255, 255, 0);
+                pObj->set_color(cl);
             }
             else if (pObj->is_monster())
             {
-                //pObj->set_color();
+                QColor cl(255, 222, 173);
+                pObj->set_color(cl);
             }
         }
     }
