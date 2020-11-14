@@ -51,7 +51,7 @@ public:
     {
         return (m_nX == other.m_nX) && (m_nY == other.m_nY);
     }
-private:
+public:
     int32_t m_nX;
     int32_t m_nY;
 };
@@ -78,7 +78,7 @@ public:
     }
 
 
-private:
+public:
     int32_t m_nNPCnums = 20; //随机生成的NPC个数
     int32_t m_nMonsternums = 200; //随机生成的怪物的个数
     int32_t m_nLTX = 0;   //地图左上角的X坐标

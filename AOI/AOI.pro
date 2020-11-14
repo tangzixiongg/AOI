@@ -8,7 +8,8 @@ SOURCES += \
     role.cpp \
     functions.cpp \
     aoi_widget.cpp \
-    singleton.inl
+    singleton.inl \
+    aoi_grid.cpp
 
 HEADERS += \
     Iobject.h \
@@ -20,6 +21,7 @@ HEADERS += \
     role.h \
     functions.h \
     aoi_widget.h \
-    singleton.h
+    singleton.h \
+    aoi_grid.h
 
 DEFINES-= UNICODE
