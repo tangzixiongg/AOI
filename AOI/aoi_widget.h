@@ -18,6 +18,9 @@ protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
 protected:
     void draw_player(const position &pos, const QColor &qc ,QPixmap &canvas);
+    void draw_npc(const position &pos, const QColor &qc, QPixmap &canvas);
+    void draw_monster(const position &pos, const QColor &qc, QPixmap &canvas);
+    position random(const position &pt);
 
 private slots:
     void refresh();
