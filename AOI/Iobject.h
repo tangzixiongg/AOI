@@ -1,4 +1,4 @@
-#pragma onece
+#pragma once
 
 #include "aoi_interface.h"
 
