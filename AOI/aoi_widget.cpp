@@ -69,8 +69,33 @@ aoi_widget::aoi_widget(std::shared_ptr<aoi_interface> pAoi,const map_info& stMap
     srand(static_cast<unsigned int>(time(nullptr)));
 
     //生成地图上的对象
-    //todo
+    //生成玩家
+    srand(static_cast<unsigned int>(time(nullptr)));
+    pRole = new role(OBJECTMGR.get_unique_id());
 
+    OBJECTMGR.add_object(pRole);
+    pRole->set_position(position(rand() % m_stMapInfo.m_nWidth, rand() % m_stMapInfo.m_nHeight));
+    m_pAoi->enter(pRole);
+
+    //生成NPC
+    int32_t nNpcNum = m_stMapInfo.m_nNPCnums;
+    for(int32_t i = 0; i < nNpcNum ; ++ i)
+    {
+        npc * pNpc = new npc(OBJECTMGR.get_unique_id());
+        OBJECTMGR.add_object(pNpc);
+        pNpc->set_position(position(rand() % m_stMapInfo.m_nWidth, rand() % m_stMapInfo.m_nHeight));
+        m_pAoi->enter(pNpc);
+    }
+
+    //生成怪物
+    int32_t nMonsterNun = m_stMapInfo.m_nMonsternums;
+    for(int32_t i = 0; i < nMonsterNun ; ++i)
+    {
+        monster * pMonster = new monster(OBJECTMGR.get_unique_id());
+        OBJECTMGR.add_object(pMonster);
+        pMonster->set_position(position(rand() % m_stMapInfo.m_nWidth, rand() % m_stMapInfo.m_nHeight));
+        m_pAoi->enter(pMonster);
+    }
 
     //启动定时器
     QTimer * gameTimer_ = new QTimer(this);
@@ -86,6 +111,7 @@ aoi_widget::~aoi_widget()
 
 void aoi_widget::paintEvent(QPaintEvent *event)
 {
+    //重载paintEvent函数绘制
     QPixmap canvas = bg_;
     OBJECTMGR.iter_all_object([this,&canvas](Iobject * pObj) -> bool {
         if(pObj->is_role())
@@ -159,16 +185,53 @@ void aoi_widget::keyPressEvent(QKeyEvent *event)
 
 void aoi_widget::draw_player(const position &pos, const QColor &qc ,QPixmap &canvas)
 {
-    return ;
+    QPainter painter(&canvas); //定义绘制基类
+    painter.setBrush(qc); //定义用于填充形状的颜色和图案
+
+    //绘制矩形
+    painter.drawRect(pos.m_nX * CM_PIXEL_NUM,pos.m_nY * CM_PIXEL_NUM ,CM_PIXEL_NUM,CM_PIXEL_NUM);
+
+    int32_t nGridx = pos.m_nX / m_stMapInfo.m_nSquareSize;
+    int32_t nGridy = pos.m_nY / m_stMapInfo.m_nSquareSize;
+
+    int32_t nLTPosX = nGridx - m_stMapInfo.m_nViewSize;
+    int32_t nLTPosY = nGridy - m_stMapInfo.m_nViewSize;
+    int32_t nRBPosX = nGridx + m_stMapInfo.m_nViewSize;
+    int32_t nRBPosY = nGridy + m_stMapInfo.m_nViewSize;
+
+    if(nLTPosX < 0)
+        nLTPosX = 0;
+    if(nLTPosY < 0)
+        nLTPosY = 0;
+    if(nRBPosX > m_stMapInfo.m_nGridXcount)
+        nRBPosX = m_stMapInfo.m_nGridXcount;
+    if(nRBPosY > m_stMapInfo.m_nGridZcount)
+        nRBPosY = m_stMapInfo.m_nGridZcount;
+
+    painter.setBrush(Qt::NoBrush);
+    painter.setPen(Qt::red);
+
+    for(int32_t i = nLTPosX ; i <= nRBPosX ; ++i)
+    {
+        for (int32_t j = nLTPosY ; j <= nRBPosY ; ++j)
+        {
+            //绘制玩家的矩形，并填充红色
+            painter.drawRect(i * m_stMapInfo.m_nGridSquarePixelNum, j * m_stMapInfo.m_nGridSquarePixelNum,m_stMapInfo.m_nGridSquarePixelNum,m_stMapInfo.m_nGridSquarePixelNum);
+        }
+    }
 }
 
 void aoi_widget::draw_npc(const position &pos, const QColor &qc, QPixmap &canvas)
 {
-
+    QPainter painter(&canvas);
+    painter.setBrush(qc); //定义用于填充形状的颜色和图案
+    painter.drawRect(pos.m_nX * CM_PIXEL_NUM , pos.m_nY * CM_PIXEL_NUM , CM_PIXEL_NUM ,CM_PIXEL_NUM);
 }
 void aoi_widget::draw_monster(const position &pos, const QColor &qc, QPixmap &canvas)
 {
-
+    QPainter painter(&canvas);
+    painter.setBrush(qc); //定义用于填充形状的颜色和图案
+    painter.drawRect(pos.m_nX * CM_PIXEL_NUM , pos.m_nY * CM_PIXEL_NUM , CM_PIXEL_NUM ,CM_PIXEL_NUM);
 }
 position aoi_widget::random(const position &pt)
 {
@@ -236,6 +299,4 @@ void aoi_widget::refresh()
 
         }
     }
-
-
 }
