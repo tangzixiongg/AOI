@@ -10,7 +10,8 @@ SOURCES += \
     aoi_widget.cpp \
     singleton.inl \
     aoi_grid.cpp \
-    view_manager.cpp
+    view_manager.cpp \
+    msg_parse_record.cpp
 
 HEADERS += \
     Iobject.h \
@@ -24,6 +25,7 @@ HEADERS += \
     aoi_widget.h \
     singleton.h \
     aoi_grid.h \
-    view_manager.h
+    view_manager.h \
+    msg_prase_record.h
 
 DEFINES-= UNICODE
