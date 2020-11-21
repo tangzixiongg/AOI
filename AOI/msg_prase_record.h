@@ -45,7 +45,7 @@ struct msg_parase_time
     }
 };
 
-typedef unordered_map<int32_t,msg_parase_time> MSGHANDLERECORE_MAP;
+typedef std::unordered_map<int32_t,msg_parase_time> MSGHANDLERECORE_MAP;
 
 class msg_prase_manager
 {

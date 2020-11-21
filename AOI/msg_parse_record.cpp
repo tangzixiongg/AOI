@@ -1,5 +1,6 @@
 #include "msg_prase_record.h"
-
+#include "functions.h"
+#include <unordered_map>
 
 msg_hander_time_record::msg_hander_time_record(uint32_t id)
     :
@@ -15,19 +16,15 @@ msg_hander_time_record::~msg_hander_time_record()
     MSGHANDERINSTANCE.add_msg_handle_record(m_id, diffTime);
 }
 
-msg_prase_manager::add_msg_handle_record(int32_t nId, int32_t nTime)
+void msg_prase_manager::add_msg_handle_record(int32_t nId, int32_t nTime)
 {
     auto iter = m_mapMsgHandleRecord.find(nId);
     if(iter == m_mapMsgHandleRecord.end())
     {
         msg_parase_time newTime(nId);
-        newTime.add(newTime);
-        m_mapMsgHandleRecord.insert(std::make_pair(mId,nTime));
+        newTime.add(nTime);
+        m_mapMsgHandleRecord.insert(std::make_pair(nId,nTime));
     }
-    else
-    {
-        iter.add(nTime);
-        ++nCount;
-    }
-
+    iter->second.add(nTime);
+    ++nCount;
 }

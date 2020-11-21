@@ -41,12 +41,11 @@ protected:
     void get_grid_square_near_all_obj(grid_square* pGs, std::vector<uint64_t>& vctObjUid);
 
 public:
-    virtual bool init(const map_info& mapInfo) override;
-    virtual bool enter(Iobject* pObj) override;
-    virtual bool leave(Iobject* pObj) override;
-    virtual void move_to(Iobject* pObj, position pos) override;
-    virtual void get_near_obj_uids(Iobject* pObj, std::vector<uint64_t>& vecObjUids) override;
-
+    bool init(const map_info& mapInfo) override;
+    bool enter(Iobject* pObj) override;
+    bool leave(Iobject* pObj) override;
+    void move_to(Iobject* pObj, position pos) override;
+    void get_near_obj_uids(Iobject* pObj, std::vector<uint64_t>& vecObjUids) override;
 private:
     std::vector<grid_square> m_vctSquare;   // 存地图上所有的格子
     map_info m_mapInfo;

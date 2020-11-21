@@ -13,7 +13,7 @@ role * pRole = nullptr;
 
 static constexpr int32_t TIME_INTERVAL = 200;
 
-aoi_widget::aoi_widget(std::shared_ptr<aoi_interface> pAoi,const map_info& stMapInfo)
+aoi_widget::aoi_widget(aoi_interface* pAoi,const map_info& stMapInfo)
     :QWidget(nullptr),
       m_pAoi(pAoi),
       m_stMapInfo(stMapInfo)
@@ -66,7 +66,7 @@ aoi_widget::aoi_widget(std::shared_ptr<aoi_interface> pAoi,const map_info& stMap
         }
     }
 
-    srand(static_cast<unsigned int>(time(nullptr)));
+    //srand(static_cast<unsigned int>(time(nullptr)));
 
     //生成地图上的对象
     //生成玩家
@@ -98,9 +98,9 @@ aoi_widget::aoi_widget(std::shared_ptr<aoi_interface> pAoi,const map_info& stMap
     }
 
     //启动定时器
-    QTimer * gameTimer_ = new QTimer(this);
-    connect(gameTimer_, SIGNAL(timeout()), this, SLOT(refresh()));
-    gameTimer_->start(TIME_INTERVAL);
+    QTimer * gameTimer = new QTimer(this);
+    connect(gameTimer, SIGNAL(timeout()), this, SLOT(refresh()));
+    gameTimer->start(TIME_INTERVAL);
 
 }
 
