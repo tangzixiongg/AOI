@@ -83,3 +83,18 @@ const aoi_calculate_result* view_manager::get_aoi_view_result(int32_t nViewSize,
 
 }
 
+void view_manager::init_view_cell()
+{
+
+}
+
+void view_manager::show()
+{
+
+}
+
+
+
+
+
+

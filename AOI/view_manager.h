@@ -53,3 +53,5 @@ public:
 private:
      std::array<view, 26> m_calculate_views;
 };
+
+#define VIEW_CELL_MGR (*(singleton<view_manager>::instance()))

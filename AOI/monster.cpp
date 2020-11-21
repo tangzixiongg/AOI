@@ -2,7 +2,10 @@
 
 monster::monster(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_MONSTER, QColor(255, 222, 173))
 {
-
+    m_eumObjType = ENUM_OBJ_TYPE::E_OBJ_TYPE_MONSTER;
+    m_color = QColor(255, 222, 173);
+    m_qwUid = qwObjId;
+    m_dwRadius = 0;
 }
 
 monster::~monster()

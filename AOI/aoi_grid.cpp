@@ -1,5 +1,6 @@
 #include "aoi_grid.h"
 #include "Iobject.h"
+#include "msg_prase_record.h"
 #include <sstream>
 
 grid_square::grid_square(int32_t nIndex): m_nIndex(nIndex)
@@ -197,6 +198,7 @@ bool aoi_grid_impl::leave(Iobject *pObj)
 void aoi_grid_impl::move_to(Iobject *pObj, position pos)
 {
     //
+    msg_hander_time_record rcd(11111);
     if (nullptr == pObj)
     {
         return;

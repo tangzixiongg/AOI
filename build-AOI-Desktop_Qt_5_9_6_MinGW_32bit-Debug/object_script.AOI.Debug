@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\monster.o
+./debug\npc.o
+./debug\object_mgr.o
+./debug\role.o
+./debug\functions.o
+./debug\aoi_widget.o
+./debug\aoi_grid.o
+./debug\view_manager.o
+./debug\msg_parse_record.o
+./debug\moc_aoi_widget.o
+);

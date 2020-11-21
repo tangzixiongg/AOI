@@ -13,7 +13,7 @@ role * pRole = nullptr;
 
 static constexpr int32_t TIME_INTERVAL = 200;
 
-aoi_widget::aoi_widget(aoi_interface* pAoi,const map_info& stMapInfo)
+aoi_widget::aoi_widget(std::shared_ptr<aoi_interface> pAoi,const map_info& stMapInfo)
     :QWidget(nullptr),
       m_pAoi(pAoi),
       m_stMapInfo(stMapInfo)
@@ -102,6 +102,8 @@ aoi_widget::aoi_widget(aoi_interface* pAoi,const map_info& stMapInfo)
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(refresh()));
     gameTimer->start(TIME_INTERVAL);
 
+    this->paintEvent(nullptr);
+    //this->keyPressEvent(nullptr);
 }
 
 aoi_widget::~aoi_widget()
@@ -116,22 +118,30 @@ void aoi_widget::paintEvent(QPaintEvent *event)
     OBJECTMGR.iter_all_object([this,&canvas](Iobject * pObj) -> bool {
         if(pObj->is_role())
         {
+            std::cout << "role" << std::endl;
             this->draw_player(pObj->cur_pos(),pObj->get_color(),canvas);
+            return true;
         }
 
         else if(pObj->is_npc())
         {
+            std::cout << "npc" << std::endl;
             this->draw_npc(pObj->cur_pos(),pObj->get_color(),canvas);
+            return true;
         }
         else if(pObj->is_monster())
         {
+            std::cout << "monster" << std::endl;
             this->draw_monster(pObj->cur_pos(),pObj->get_color(),canvas);
+            return true;
         }
-        return  true;
+        std::cout << "tangzixiong nononono!!!" << std::endl;
+        return false;
     });
 
     QPainter painter(this);
     painter.drawPixmap(0,0,canvas);
+    std::cout << "test" << std::endl;
     return ;
 }
 
@@ -185,6 +195,7 @@ void aoi_widget::keyPressEvent(QKeyEvent *event)
 
 void aoi_widget::draw_player(const position &pos, const QColor &qc ,QPixmap &canvas)
 {
+    std::cout << "draw_player" << std::endl;
     QPainter painter(&canvas); //定义绘制基类
     painter.setBrush(qc); //定义用于填充形状的颜色和图案
 
@@ -223,12 +234,14 @@ void aoi_widget::draw_player(const position &pos, const QColor &qc ,QPixmap &can
 
 void aoi_widget::draw_npc(const position &pos, const QColor &qc, QPixmap &canvas)
 {
+    std::cout << "draw_npc" << std::endl;
     QPainter painter(&canvas);
     painter.setBrush(qc); //定义用于填充形状的颜色和图案
     painter.drawRect(pos.m_nX * CM_PIXEL_NUM , pos.m_nY * CM_PIXEL_NUM , CM_PIXEL_NUM ,CM_PIXEL_NUM);
 }
 void aoi_widget::draw_monster(const position &pos, const QColor &qc, QPixmap &canvas)
 {
+    std::cout << "draw_monster" << std::endl;
     QPainter painter(&canvas);
     painter.setBrush(qc); //定义用于填充形状的颜色和图案
     painter.drawRect(pos.m_nX * CM_PIXEL_NUM , pos.m_nY * CM_PIXEL_NUM , CM_PIXEL_NUM ,CM_PIXEL_NUM);

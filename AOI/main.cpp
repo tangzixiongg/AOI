@@ -30,11 +30,22 @@ int32_t main(int32_t argc, char* argv[])
     stMapinfo.m_bCheckViewObject = get_server_config_value("Config","bCheckViewObject",0,strFileName) == 1;
     stMapinfo.m_bMonsterMove = get_server_config_value("Config","bMonsterMove",0,strFileName) == 1;
 
+    stMapinfo.m_bMonsterMove = true;
+    VIEW_CELL_MGR.init_view_cell();
+
+    /*
     QWidget * w;
     aoi_interface * pAoi = make_aoi_grid();
-    pAoi->init(stMapinfo);
-
+    pAoi->init(stMapinfo);   
     w = new aoi_widget(pAoi,stMapinfo);
+    */
+
+    std::shared_ptr<aoi_interface> pAOI = std::shared_ptr<aoi_interface>(make_aoi_grid());
+    pAOI->init(stMapinfo);
+    //std::shared_ptr<QWidget> w = std::shared_ptr<aoi_widget>(pAOI, stMapinfo);
+    QWidget* w = new aoi_widget(pAOI, stMapinfo);
+    //w->paintEvent(nullptr);
+
     w->show();
     return app.exec();
 }

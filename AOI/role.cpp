@@ -2,7 +2,10 @@
 
 role::role(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_ROLE, QColor(0, 0, 0))
 {
-
+    m_eumObjType = ENUM_OBJ_TYPE::E_OBJ_TYPE_ROLE;
+    m_color = QColor(0, 0, 0);
+    m_qwUid = qwObjId;
+    m_dwRadius = 0;
 }
 
 role::~role()

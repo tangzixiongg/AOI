@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\monster.o
+./release\npc.o
+./release\object_mgr.o
+./release\role.o
+./release\functions.o
+./release\aoi_widget.o
+./release\aoi_grid.o
+./release\view_manager.o
+./release\msg_parse_record.o
+./release\moc_aoi_widget.o
+);

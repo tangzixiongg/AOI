@@ -2,7 +2,10 @@
 
 npc::npc(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_NPC, QColor(255, 255, 0))
 {
-
+    m_eumObjType = ENUM_OBJ_TYPE::E_OBJ_TYPE_NPC;
+    m_color = QColor(255, 255, 0);
+    m_qwUid = qwObjId;
+    m_dwRadius = 0;
 }
 
 npc::~npc()
