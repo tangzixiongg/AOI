@@ -24,6 +24,7 @@ void msg_prase_manager::add_msg_handle_record(int32_t nId, int32_t nTime)
         msg_parase_time newTime(nId);
         newTime.add(nTime);
         m_mapMsgHandleRecord.insert(std::make_pair(nId,nTime));
+        return;
     }
     iter->second.add(nTime);
     ++nCount;

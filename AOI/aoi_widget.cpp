@@ -8,6 +8,8 @@
 #include "npc.h"
 #include "monster.h"
 #include "object_mgr.h"
+#include "Iobject.h"
+#include "msg_prase_record.h"
 
 role * pRole = nullptr;
 
@@ -111,7 +113,7 @@ aoi_widget::~aoi_widget()
 
 }
 
-void aoi_widget::paintEvent(QPaintEvent *event)
+void aoi_widget::paintEvent(QPaintEvent *)
 {
     //重载paintEvent函数绘制
     QPixmap canvas = bg_;
@@ -136,13 +138,12 @@ void aoi_widget::paintEvent(QPaintEvent *event)
             return true;
         }
         std::cout << "tangzixiong nononono!!!" << std::endl;
-        return false;
+        return true;
     });
 
     QPainter painter(this);
     painter.drawPixmap(0,0,canvas);
     std::cout << "test" << std::endl;
-    return ;
 }
 
 void aoi_widget::keyPressEvent(QKeyEvent *event)
@@ -307,7 +308,19 @@ void aoi_widget::refresh()
         int32_t rnd = rand() % 100;
         if (rnd < 10)
         {
-
+            msg_hander_time_record record(999999);
+            std::vector<uint64_t> vecUids;
+            m_pAoi->get_near_obj_uids(pRole,vecUids);
+            for(auto &uid:vecUids)
+            {
+                Iobject * pObject = OBJECTMGR.get_object(uid);
+                if(!pObject->is_role())
+                {
+                    QColor cl(106,90 ,205);
+                    pObject->set_color(cl);
+                }
+            }
         }
     }
+    update();
 }
