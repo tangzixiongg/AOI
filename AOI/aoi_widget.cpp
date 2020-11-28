@@ -189,8 +189,6 @@ void aoi_widget::keyPressEvent(QKeyEvent *event)
 
     m_pAoi->move_to(pRole, curPos);
     pRole->set_position(curPos);
-    return ;
-
 }
 
 void aoi_widget::draw_player(const position &pos, const QColor &qc ,QPixmap &canvas)

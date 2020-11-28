@@ -14,8 +14,8 @@ public:
     ~aoi_widget();
 //protected:
 
-    void paintEvent(QPaintEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
+    void paintEvent(QPaintEvent *) override;
+    void keyPressEvent(QKeyEvent *) override;
 protected:
     void draw_player(const position &pos, const QColor &qc ,QPixmap &canvas);
     void draw_npc(const position &pos, const QColor &qc, QPixmap &canvas);
