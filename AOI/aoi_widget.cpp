@@ -120,30 +120,25 @@ void aoi_widget::paintEvent(QPaintEvent *)
     OBJECTMGR.iter_all_object([this,&canvas](Iobject * pObj) -> bool {
         if(pObj->is_role())
         {
-            std::cout << "role" << std::endl;
             this->draw_player(pObj->cur_pos(),pObj->get_color(),canvas);
             return true;
         }
 
         else if(pObj->is_npc())
         {
-            std::cout << "npc" << std::endl;
             this->draw_npc(pObj->cur_pos(),pObj->get_color(),canvas);
             return true;
         }
         else if(pObj->is_monster())
         {
-            std::cout << "monster" << std::endl;
             this->draw_monster(pObj->cur_pos(),pObj->get_color(),canvas);
             return true;
         }
-        std::cout << "tangzixiong nononono!!!" << std::endl;
         return true;
     });
 
     QPainter painter(this);
     painter.drawPixmap(0,0,canvas);
-    std::cout << "test" << std::endl;
 }
 
 void aoi_widget::keyPressEvent(QKeyEvent *event)
@@ -194,7 +189,6 @@ void aoi_widget::keyPressEvent(QKeyEvent *event)
 
 void aoi_widget::draw_player(const position &pos, const QColor &qc ,QPixmap &canvas)
 {
-    std::cout << "draw_player" << std::endl;
     QPainter painter(&canvas); //定义绘制基类
     painter.setBrush(qc); //定义用于填充形状的颜色和图案
 
@@ -233,14 +227,12 @@ void aoi_widget::draw_player(const position &pos, const QColor &qc ,QPixmap &can
 
 void aoi_widget::draw_npc(const position &pos, const QColor &qc, QPixmap &canvas)
 {
-    std::cout << "draw_npc" << std::endl;
     QPainter painter(&canvas);
     painter.setBrush(qc); //定义用于填充形状的颜色和图案
     painter.drawRect(pos.m_nX * CM_PIXEL_NUM , pos.m_nY * CM_PIXEL_NUM , CM_PIXEL_NUM ,CM_PIXEL_NUM);
 }
 void aoi_widget::draw_monster(const position &pos, const QColor &qc, QPixmap &canvas)
 {
-    std::cout << "draw_monster" << std::endl;
     QPainter painter(&canvas);
     painter.setBrush(qc); //定义用于填充形状的颜色和图案
     painter.drawRect(pos.m_nX * CM_PIXEL_NUM , pos.m_nY * CM_PIXEL_NUM , CM_PIXEL_NUM ,CM_PIXEL_NUM);
@@ -316,7 +308,7 @@ void aoi_widget::refresh()
                 Iobject * pObject = OBJECTMGR.get_object(uid);
                 if(!pObject->is_role())
                 {
-                    QColor cl(106,90 ,205);
+                    QColor cl(0,0,0);
                     pObject->set_color(cl);
                 }
             }

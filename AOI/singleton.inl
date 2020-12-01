@@ -1,4 +1,5 @@
 #pragma once
+#include "singleton.h"
 
 template <typename ValueType, typename ThreadLock>
 ThreadLock singleton<ValueType,ThreadLock>::s_lock;

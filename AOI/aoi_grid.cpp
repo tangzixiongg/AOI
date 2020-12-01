@@ -61,7 +61,7 @@ int32_t aoi_grid_impl::point_to_square_index(const position &pos)
     return -1;
 }
 
-// 得到 pObj 附近所有对象的uid
+// 得到 pGs 附近所有对象的uid
 void aoi_grid_impl::get_grid_square_near_all_obj(grid_square *pGs, std::vector<uint64_t> &vctObjUid)
 {
     if (nullptr == pGs)
@@ -103,7 +103,7 @@ bool aoi_grid_impl::init(const map_info &mapInfo)
     {
         grid_square& square = m_vctSquare[i];
         int32_t nX = i % m_mapInfo.m_nGridXcount;
-        int32_t nY = i % m_mapInfo.m_nGridZcount;
+        int32_t nY = i / m_mapInfo.m_nGridXcount;
         link_to_square(nX - 1, nY - 1, square);
         link_to_square(nX, nY - 1, square);
         link_to_square(nX + 1, nY - 1, square);
@@ -209,6 +209,8 @@ void aoi_grid_impl::move_to(Iobject *pObj, position pos)
     {
         return;
     }
+    std::cout << "old pos: " << pObj->cur_pos().m_nX << ", " << pObj->cur_pos().m_nY << std::endl;
+    std::cout << "new pos: " << pos.m_nX << ", " << pos.m_nY << std::endl;
 
     grid_square *pNewGS = get_grid_square(point_to_square_index(pos));
     if (nullptr == pNewGS)
@@ -242,7 +244,7 @@ void aoi_grid_impl::move_to(Iobject *pObj, position pos)
         grid_square* pTmp = get_grid_square(vctFadeOldIdx[i]);
         if (nullptr != pTmp)
         {
-            const auto& objs = pTmp->get_near_squareIdx();
+            const auto& objs = pTmp->get_object_uids();
             vctFadeOutObjUid.insert(vctFadeOutObjUid.end(), objs.begin(), objs.end());
         }
     }
@@ -251,10 +253,23 @@ void aoi_grid_impl::move_to(Iobject *pObj, position pos)
     pNewGS->insert_object(pObj->get_uid());
 
     // 视野范围新增的对象集合
-    pObj->fade_in(vctFadeInObjUid);
+    //pObj->fade_in(vctFadeInObjUid);
+    std::cout << "fadeIn" << std::endl;
+    for (size_t i = 0; i < vctFadeInObjUid.size(); i++)
+    {
+        std::cout << vctFadeInObjUid[i] << ", ";
+        pObj->fade_in(vctFadeInObjUid);
+    }
+    std::cout << std::endl;
 
     // 视野范围减少的对象集合
     pObj->fade_out(vctFadeOutObjUid);
+    std::cout << "fadeOut" << std::endl;
+    for (size_t i = 0; i < vctFadeOutObjUid.size(); i++)
+    {
+        std::cout << vctFadeOutObjUid[i] << ", ";
+    }
+    std::cout << std::endl;
 }
 
 void aoi_grid_impl::get_near_obj_uids(Iobject *pObj, std::vector<uint64_t> &vecObjUids)
