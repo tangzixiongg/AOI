@@ -86,12 +86,12 @@ void role::fade_out(const std::vector<uint64_t>& vecFadeOutObjUids)
         {
             if (pObj->is_npc())
             {
-                QColor cl(255, 255, 0);
+                QColor cl(0, 255, 0);
                 pObj->set_color(cl);
             }
             else if (pObj->is_monster())
             {
-                QColor cl(255, 222, 173);
+                QColor cl(132, 112 ,255);
                 pObj->set_color(cl);
             }
         }

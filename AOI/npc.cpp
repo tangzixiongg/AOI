@@ -1,9 +1,9 @@
 #include "npc.h"
 
-npc::npc(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_NPC, QColor(255, 255, 0))
+npc::npc(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_NPC, QColor(0, 255, 0))
 {
     m_eumObjType = ENUM_OBJ_TYPE::E_OBJ_TYPE_NPC;
-    m_color = QColor(255, 255, 0);
+    m_color = QColor(0, 255, 0);
     m_qwUid = qwObjId;
     m_dwRadius = 0;
 }
@@ -93,7 +93,7 @@ void npc::fade_out(const std::vector<uint64_t>& vecFadeOutObjUids)
         Iobject* pObj = OBJECTMGR.get_object(uid);
         if (nullptr != pObj && pObj->is_role())
         {
-            QColor cl(255, 255, 0);
+            QColor cl(0, 255, 0);
             this->set_color(cl);
             break;
         }

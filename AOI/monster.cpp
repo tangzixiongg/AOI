@@ -1,9 +1,9 @@
 #include "monster.h"
 
-monster::monster(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_MONSTER, QColor(255, 222, 173))
+monster::monster(uint64_t qwObjId): Iobject(qwObjId, ENUM_OBJ_TYPE::E_OBJ_TYPE_MONSTER, QColor(132, 112 ,255))
 {
     m_eumObjType = ENUM_OBJ_TYPE::E_OBJ_TYPE_MONSTER;
-    m_color = QColor(255, 222, 173);
+    m_color = QColor(132, 112 ,255);
     m_qwUid = qwObjId;
     m_dwRadius = 0;
 }
@@ -93,7 +93,7 @@ void monster::fade_out(const std::vector<uint64_t>& vecFadeOutObjUids)
         Iobject* pObj = OBJECTMGR.get_object(uid);
         if (nullptr != pObj && pObj->is_role())
         {
-            QColor cl(255, 222, 173);
+            QColor cl(132, 112 ,255);
             this->set_color(cl);
             break;
         }
